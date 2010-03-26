@@ -1,0 +1,15 @@
+Project: Google-Data-APIs-Mavenized
+
+Owner: David Carter david@carter.net
+
+Description: Generate Maven poms & deployment script from gdata-java-client jar releases and publish to mvn central repo via Sonatype OSS repo hosting.
+
+Rationale: The gdata-java-client project http://code.google.com/p/gdata-java-client/ has had open enhancement requests since at least June 2008 to make their jar artifacts available via a public Maven repository. See current open requests here: http://code.google.com/p/gdata-java-client/issues/list?can=2&q=maven  For whatever reasons, the project team has chosen not to do this, making life more difficult than it has to be for other developers depending on their artifacts. Developers who want to use the gdata APIs must manually download the release archive, unpack it, and then manually add the jars to their projects, local maven repositories, corporate 3rd-party artifact maven repositories, etc. Additionally, there is a reported issue with the way the API and release version numbers are used in the jar names that has not been addressed. This project will take care of both of those issues, and make depending on the gdata jars "just work" in the Maven way.
+
+Approach: This project will not be a direct hosting site for a Maven repo. Instead, the project will create a tool to automate the generation of the required Maven pom files and the generation of a shell script to upload the jars and poms to a maven repository. The project will rely on the free open source repository hosting provided by Sonatype. The jars will be uploaded to the Sonatype staging repository, and will then be automatically promoted to the Maven central repository. The generated pom files will contain all of the metadata required to pass the Sonatype & Maven central quality checks. 
+
+Related Projects:
+- jBoss tattletale http://www.jboss.org/tattletale - uses bytecode analysis of java class files in jars to determine actual (vs. declared) dependencies. Our pom generation script relies on the output from tattletale.
+- Mandubian Google Data Apis Mavenized http://www.mandubian.org/magnoliaPublic/mandubian-org/opensource-playground/mandubian-mvn.html - A similar project to this one, which gave the inspiration for this project. Differences: (1) Mandubian actually hosts a maven repo for the gdata jars, with hosting provided at Google Code. This is less than optimal, since users must add this repo to their project's maven configuration. (2) Mandubian does not include dependency information in the pom files they provide, thus automated transitive dependency management via maven metadata is not available. Users must do the transitive dependency detective work themselves, and add all these dependencies to their project's pom. A positve point of the Mandubian project is the approach it takes to the jar file version numbering issue. See details here: http://code.google.com/p/mandubian-mvn/wiki/AvailableVersions  This project will follow this versioning precedent, which is more in keeping with good software engineering practices. 
+
+
