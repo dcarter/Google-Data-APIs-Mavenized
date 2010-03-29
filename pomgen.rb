@@ -105,7 +105,7 @@ end
 
 def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALSE)
 
-  outdir = snapshot? File.join(dest, "snapshot", "v#{version}") : File.join(dest, "release", "v#{version}")
+  outdir = snapshot ? File.join(dest, "snapshot", "v#{version}") : File.join(dest, "release", "v#{version}")
   
   FileUtils.rm_r(outdir)  if File.exists?(outdir)    # start clean each time, so we have no orphan pom if a jar is deleted
   FileUtils.mkdir(outdir)
@@ -185,8 +185,6 @@ end
 
 # execution begins here
 
-snapshot = TRUE
-
 tempdir = File.join(Dir.tmpdir,"gdata-mvn")
 FileUtils.mkdir(tempdir) unless File.exists?(tempdir) && File.directory?(tempdir)
 
@@ -201,10 +199,14 @@ $Tattletale = get_tattletale(tempdir)
 
   deps = find_dependencies(version, jarpath, tempdir)
 
-  location = generate_poms(version, deps, jarpath, outdir, snapshot)
-  
-  puts "Poms & deployment script created in #{location}\n\n"
+  # generate snapshot poms  
+  snaps_location = generate_poms(version, deps, jarpath, outdir, TRUE)
     
+  # generate release poms
+  rel_location   = generate_poms(version, deps, jarpath, outdir, FALSE)
+  
+  puts "Snapshot poms & deployment script created in #{snaps_location}\n\n"
+  puts "Release poms & deployment script created in #{rel_location}\n\n"
 }
 
 
