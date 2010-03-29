@@ -97,7 +97,7 @@ def find_dependencies(version, jarpath, dest=Dir.tmpdir)
 
   terminal_deps.each {|dep|
     # add an "empty" dependency entry for each terminal dependency
-    # unless it is the google collections or jsr305 jar, which already exist on maven central, so we don't want to upload another
+    # unless it is the google collections jar, which already exist on maven central, so we don't want to upload another
     depends_hash[dep] = nil unless dep =~ /^google-collect-/
   }
   return depends_hash
@@ -105,14 +105,14 @@ end
 
 def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALSE)
 
-  outdir = snapshot ? File.join(dest, "snapshot", "v#{version}") : File.join(dest, "release", "v#{version}")
+  outdir = File.join(dest, snapshot ? "snapshot" : "release", "v#{version}")
   
   FileUtils.rm_r(outdir)  if File.exists?(outdir)    # start clean each time, so we have no orphan pom if a jar is deleted
   FileUtils.mkdir(outdir)
   
   repo = snapshot ? $Snapshot_repo : $Release_repo
   repo_url = snapshot ? $Snapshot_repo_url : $Release_repo_url
-  pom_version = snapshot ? version + '-SNAPSHOT' : version
+  pom_version = version + (snapshot ? '-SNAPSHOT' : '')
   mvn_cmd = snapshot ? $Mvn_deploy_snapshot : $Mvn_deploy_release
   
   puts "Generating poms to #{outdir}"
@@ -156,7 +156,7 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
         # if the dependency is on google collections, need to use the proper group/artifact/version
         # TODO: move this to find_dependencies phase. will require expanding the dependencies data structure to include group & version
         #       in addition to artifactId 
-        if dep =~ /google-collect-(\S+)/   then    # e.g. - google-collect-1.0-rc1.jar
+        if dep =~ /google-collect-(\S+)/   then    # e.g. - google-collect-1.0-rc1
           dep_group = 'com.google.collections'
           dep_artifact = 'google-collections'
           dep_version = $1
@@ -206,7 +206,7 @@ $Tattletale = get_tattletale(tempdir)
   rel_location   = generate_poms(version, deps, jarpath, outdir, FALSE)
   
   puts "Snapshot poms & deployment script created in #{snaps_location}\n\n"
-  puts "Release poms & deployment script created in #{rel_location}\n\n"
+  puts " Release poms & deployment script created in #{rel_location}\n\n"
 }
 
 
