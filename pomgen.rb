@@ -4,6 +4,10 @@ require 'pp';
 require 'set';
 require 'tmpdir'
 
+# maven command lines
+$Mvn_deploy_snapshot = 'mvn -e deploy:deploy-file'
+$Mvn_deploy_release  = 'mvn -e gpg:sign-and-deploy-file'
+
 # maven coordinates
 $Group = 'com.github.dcarter.gdata-java-client'
 $Release_repo = 'sonatype-nexus-staging' 
@@ -109,6 +113,7 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
   repo = snapshot ? $Snapshot_repo : $Release_repo
   repo_url = snapshot ? $Snapshot_repo_url : $Release_repo_url
   pom_version = snapshot ? version + '-SNAPSHOT' : version
+  mvn_cmd = snapshot ? $Mvn_deploy_snapshot : $Mvn_deploy_release
   
   puts "Generating poms to #{outdir}"
   script_file_name = File.join(outdir,"mvn_deploy_gdata_#{version}")
@@ -171,7 +176,7 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
     pom_file.puts "</project>"
     pom_file.close;
     jar = File.join(jarpath,"#{key}.jar")
-    script_file.puts "mvn -e deploy:deploy-file -Dfile=#{jar} -DpomFile=#{pom_file_name} -DrepositoryId=#{repo} -Durl=#{repo_url}"
+    script_file.puts "#{mvn_cmd} -Dfile=#{jar} -DpomFile=#{pom_file_name} -DrepositoryId=#{repo} -Durl=#{repo_url}"
   }
   script_file.close
   FileUtils.chmod(0744,script_file_name)
