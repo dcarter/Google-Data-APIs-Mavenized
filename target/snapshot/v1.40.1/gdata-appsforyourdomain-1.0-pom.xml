@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.dcarter.gdata-java-client</groupId>
+  <artifactId>gdata-appsforyourdomain-1.0</artifactId>
+  <version>1.40.1-SNAPSHOT</version>
+  <name>gdata-appsforyourdomain-1.0</name>
+  <description>3rd-party jar gdata-appsforyourdomain-1.0 from gdata-java-client project repackaged to meet requirements of Maven central repo</description>
+  <url>http://code.google.com/p/gdata-java-client/</url>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <scm>
+    <url>http://code.google.com/p/gdata-java-client/source/browse/</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>gdata-team</id>
+      <name>The Google GData Team</name>
+      <url>http://code.google.com/p/gdata-java-client/people/list</url>
+      <organization>Google</organization>
+    </developer>
+  </developers>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.dcarter.gdata-java-client</groupId>
+      <artifactId>gdata-client-1.0</artifactId>
+      <version>1.40.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.dcarter.gdata-java-client</groupId>
+      <artifactId>gdata-core-1.0</artifactId>
+      <version>1.40.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.dcarter.gdata-java-client</groupId>
+      <artifactId>gdata-media-1.0</artifactId>
+      <version>1.40.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</project>
