@@ -121,8 +121,8 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
   script_file.puts "#!/bin/bash\n\n"
 
   dependencies.keys.sort.each { |key|  
-    pom_file_name = File.join(outdir,"#{key}-pom.xml")
-    pom_file = File.new(pom_file_name, "w")
+    pom_file_name = key + "-pom.xml"
+    pom_file = File.new(File.join(outdir,pom_file_name), "w")
 
     pom_file.puts '<?xml version="1.0" encoding="UTF-8"?>'
     pom_file.puts '<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">'
@@ -176,7 +176,8 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
     pom_file.puts "</project>"
     pom_file.close;
     jar = File.join(jarpath,"#{key}.jar")
-    script_file.puts "#{mvn_cmd} -Dfile=#{jar} -DpomFile=#{pom_file_name} -DrepositoryId=#{repo} -Durl=#{repo_url}"
+    pom_file_name_rel = File.join(".",pom_file_name)
+    script_file.puts "#{mvn_cmd} -Dfile=#{jar} -DpomFile=#{pom_file_name_rel} -DrepositoryId=#{repo} -Durl=#{repo_url}"
   }
   script_file.close
   FileUtils.chmod(0744,script_file_name)
