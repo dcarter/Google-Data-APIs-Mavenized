@@ -1,25 +1,31 @@
 #!/bin/bash
 
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-analytics-2.1.jar -DpomFile=./gdata-analytics-2.1-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-appsforyourdomain-1.0.jar -DpomFile=./gdata-appsforyourdomain-1.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-base-1.0.jar -DpomFile=./gdata-base-1.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-blogger-2.0.jar -DpomFile=./gdata-blogger-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-books-1.0.jar -DpomFile=./gdata-books-1.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-calendar-2.0.jar -DpomFile=./gdata-calendar-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-client-1.0.jar -DpomFile=./gdata-client-1.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-codesearch-2.0.jar -DpomFile=./gdata-codesearch-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-contacts-3.0.jar -DpomFile=./gdata-contacts-3.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-core-1.0.jar -DpomFile=./gdata-core-1.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-docs-3.0.jar -DpomFile=./gdata-docs-3.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-finance-2.0.jar -DpomFile=./gdata-finance-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-gtt-2.0.jar -DpomFile=./gdata-gtt-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-health-2.0.jar -DpomFile=./gdata-health-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-maps-2.0.jar -DpomFile=./gdata-maps-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-media-1.0.jar -DpomFile=./gdata-media-1.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-photos-2.0.jar -DpomFile=./gdata-photos-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-projecthosting-2.1.jar -DpomFile=./gdata-projecthosting-2.1-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-sidewiki-2.0.jar -DpomFile=./gdata-sidewiki-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-sites-2.0.jar -DpomFile=./gdata-sites-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-spreadsheet-3.0.jar -DpomFile=./gdata-spreadsheet-3.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-webmastertools-2.0.jar -DpomFile=./gdata-webmastertools-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
-mvn -e deploy:deploy-file -Dfile=/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/gdata-youtube-2.0.jar -DpomFile=./gdata-youtube-2.0-pom.xml -DrepositoryId=sonatype-nexus-snapshots -Durl=http://oss.sonatype.org/content/repositories/snapshots
+MVN='mvn -e deploy:deploy-file'
+JARS='/tmp/gdata-mvn/gdata-src.java-1.40.1/gdata/java/lib/'
+POMS='./'
+REPO='sonatype-nexus-snapshots'
+URL='http://oss.sonatype.org/content/repositories/snapshots'
+
+${MVN} -Dfile=${JARS}gdata-analytics-2.1.jar -DpomFile=${POMS}gdata-analytics-2.1-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-appsforyourdomain-1.0.jar -DpomFile=${POMS}gdata-appsforyourdomain-1.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-base-1.0.jar -DpomFile=${POMS}gdata-base-1.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-blogger-2.0.jar -DpomFile=${POMS}gdata-blogger-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-books-1.0.jar -DpomFile=${POMS}gdata-books-1.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-calendar-2.0.jar -DpomFile=${POMS}gdata-calendar-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-client-1.0.jar -DpomFile=${POMS}gdata-client-1.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-codesearch-2.0.jar -DpomFile=${POMS}gdata-codesearch-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-contacts-3.0.jar -DpomFile=${POMS}gdata-contacts-3.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-core-1.0.jar -DpomFile=${POMS}gdata-core-1.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-docs-3.0.jar -DpomFile=${POMS}gdata-docs-3.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-finance-2.0.jar -DpomFile=${POMS}gdata-finance-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-gtt-2.0.jar -DpomFile=${POMS}gdata-gtt-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-health-2.0.jar -DpomFile=${POMS}gdata-health-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-maps-2.0.jar -DpomFile=${POMS}gdata-maps-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-media-1.0.jar -DpomFile=${POMS}gdata-media-1.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-photos-2.0.jar -DpomFile=${POMS}gdata-photos-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-projecthosting-2.1.jar -DpomFile=${POMS}gdata-projecthosting-2.1-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-sidewiki-2.0.jar -DpomFile=${POMS}gdata-sidewiki-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-sites-2.0.jar -DpomFile=${POMS}gdata-sites-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-spreadsheet-3.0.jar -DpomFile=${POMS}gdata-spreadsheet-3.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-webmastertools-2.0.jar -DpomFile=${POMS}gdata-webmastertools-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}
+${MVN} -Dfile=${JARS}gdata-youtube-2.0.jar -DpomFile=${POMS}gdata-youtube-2.0-pom.xml -DrepositoryId=${REPO} -Durl=${URL}

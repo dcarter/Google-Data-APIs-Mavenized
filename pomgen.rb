@@ -110,15 +110,19 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
   FileUtils.rm_r(outdir)  if File.exists?(outdir)    # start clean each time, so we have no orphan pom if a jar is deleted
   FileUtils.mkdir(outdir)
   
-  repo = snapshot ? $Snapshot_repo : $Release_repo
-  repo_url = snapshot ? $Snapshot_repo_url : $Release_repo_url
   pom_version = version + (snapshot ? '-SNAPSHOT' : '')
-  mvn_cmd = snapshot ? $Mvn_deploy_snapshot : $Mvn_deploy_release
   
   puts "Generating poms to #{outdir}"
+  
   script_file_name = File.join(outdir,"mvn_deploy_gdata_#{version}")
   script_file = File.new(script_file_name, "w")
+  
   script_file.puts "#!/bin/bash\n\n"
+  script_file.puts "MVN='#{snapshot ? $Mvn_deploy_snapshot : $Mvn_deploy_release}'"
+  script_file.puts "JARS='#{File.join(jarpath,'/')}'"
+  script_file.puts "POMS='#{File.join('.','/')}'"
+  script_file.puts "REPO='#{snapshot ? $Snapshot_repo : $Release_repo}'"
+  script_file.puts "URL='#{snapshot ? $Snapshot_repo_url : $Release_repo_url}'\n\n"
 
   dependencies.keys.sort.each { |key|  
     pom_file_name = key + "-pom.xml"
@@ -175,9 +179,7 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
     end
     pom_file.puts "</project>"
     pom_file.close;
-    jar = File.join(jarpath,"#{key}.jar")
-    pom_file_name_rel = File.join(".",pom_file_name)
-    script_file.puts "#{mvn_cmd} -Dfile=#{jar} -DpomFile=#{pom_file_name_rel} -DrepositoryId=#{repo} -Durl=#{repo_url}"
+    script_file.puts "${MVN} -Dfile=${JARS}#{key}.jar -DpomFile=${POMS}#{pom_file_name} -DrepositoryId=${REPO} -Durl=${URL}"
   }
   script_file.close
   FileUtils.chmod(0744,script_file_name)
