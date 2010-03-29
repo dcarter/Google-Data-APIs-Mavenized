@@ -101,7 +101,8 @@ end
 
 def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALSE)
 
-  outdir = File.join(dest, "v#{version}")
+  outdir = snapshot? File.join(dest, "snapshot", "v#{version}") : File.join(dest, "release", "v#{version}")
+  
   FileUtils.rm_r(outdir)  if File.exists?(outdir)    # start clean each time, so we have no orphan pom if a jar is deleted
   FileUtils.mkdir(outdir)
   
@@ -184,7 +185,7 @@ snapshot = TRUE
 tempdir = File.join(Dir.tmpdir,"gdata-mvn")
 FileUtils.mkdir(tempdir) unless File.exists?(tempdir) && File.directory?(tempdir)
 
-outdir = File.join(FileUtils.pwd(),"gdata-poms")
+outdir = File.join(FileUtils.pwd(),"target")
 FileUtils.mkdir(outdir) unless File.exists?(outdir) && File.directory?(outdir)
 
 $Tattletale = get_tattletale(tempdir)
