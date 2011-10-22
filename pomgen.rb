@@ -196,7 +196,7 @@ FileUtils.mkdir(outdir) unless File.exists?(outdir) && File.directory?(outdir)
 
 $Tattletale = get_tattletale(tempdir)
 
-['1.40.0', '1.40.1', '1.40.2', '1.40.3', '1.41.0', '1.41.1'].each { |version|
+['1.40.0', '1.40.1', '1.40.2', '1.40.3', '1.41.0', '1.41.1', '1.41.2', '1.42.0', '1.43.0', '1.44.0', '1.45.0', '1.46.0' ].each { |version|
   
   jarpath = get_gdata_jars(version, tempdir)
 
