@@ -48,6 +48,8 @@ def get_gdata_jars(version, dest=Dir.tmpdir)
   # gdata jars are cached; if you want to re-download a given version, you must delete prev files
   if !(File.exists?(libs) && File.directory?(libs)) then  
     puts "Downloading #{archive}"  
+    `echo wget -nc #{uri} -O #{destfile}`
+    `echo unzip #{destfile} -d #{destdir}`
     `wget -nc #{uri} -O #{destfile}`
     `unzip #{destfile} -d #{destdir}`
     FileUtils.rm(destfile)
@@ -98,16 +100,18 @@ def find_dependencies(version, jarpath, dest=Dir.tmpdir)
   terminal_deps.each {|dep|
     # add an "empty" dependency entry for each terminal dependency
     # unless it is the google collections jar, which already exist on maven central, so we don't want to upload another
-    depends_hash[dep] = nil unless dep =~ /^google-collect-/
+    depends_hash[dep] = nil unless dep =~ /^guava-/ || dep =~ /^google-collect-/
   }
   return depends_hash
 end 
 
 def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALSE)
 
+  outdirBase = File.join(dest, snapshot ? "snapshot" : "release")
   outdir = File.join(dest, snapshot ? "snapshot" : "release", "v#{version}")
   
   FileUtils.rm_r(outdir)  if File.exists?(outdir)    # start clean each time, so we have no orphan pom if a jar is deleted
+  FileUtils.mkdir(outdirBase) if !File.exists?(outdirBase)
   FileUtils.mkdir(outdir)
   
   pom_version = version + (snapshot ? '-SNAPSHOT' : '')
@@ -160,14 +164,20 @@ def generate_poms(version, dependencies, jarpath, dest=Dir.tmpdir, snapshot=FALS
         # if the dependency is on google collections, need to use the proper group/artifact/version
         # TODO: move this to find_dependencies phase. will require expanding the dependencies data structure to include group & version
         #       in addition to artifactId 
-        if dep =~ /google-collect-(\S+)/   then    # e.g. - google-collect-1.0-rc1
-          dep_group = 'com.google.collections'
-          dep_artifact = 'google-collections'
-          dep_version = $1
+        if dep =~ /guava-(\S+)/   then    # e.g. - guava-1.0-rc1
+          dep_group = 'com.google.guava'
+          dep_artifact = 'guava'
+          dep_version = $1.sub("-", ".")   # e.g. guava-11.0-2 to guava-11.0.2
         else
-          dep_group = $Group
-          dep_artifact = dep
-          dep_version = pom_version
+          if dep =~ /google-collect-(\S+)/   then    # e.g. - google-collect-1.0-rc1
+            dep_group = 'com.google.collections'
+            dep_artifact = 'google-collections'
+            dep_version = $1
+          else
+            dep_group = $Group
+            dep_artifact = dep
+            dep_version = pom_version
+          end
         end
         pom_file.puts "    <dependency>"
         pom_file.puts "      <groupId>#{dep_group}</groupId>"
@@ -196,7 +206,7 @@ FileUtils.mkdir(outdir) unless File.exists?(outdir) && File.directory?(outdir)
 
 $Tattletale = get_tattletale(tempdir)
 
-['1.40.0', '1.40.1', '1.40.2', '1.40.3', '1.41.0', '1.41.1', '1.41.2', '1.42.0', '1.43.0', '1.44.0', '1.45.0', '1.46.0' ].each { |version|
+['1.40.0', '1.40.1', '1.40.2', '1.40.3', '1.41.0', '1.41.1', '1.41.2', '1.42.0', '1.43.0', '1.44.0', '1.45.0', '1.46.0', '1.47.0', '1.47.1' ].each { |version|
   
   jarpath = get_gdata_jars(version, tempdir)
 
@@ -211,8 +221,3 @@ $Tattletale = get_tattletale(tempdir)
   puts "Snapshot poms & deployment script created in #{snaps_location}\n\n"
   puts " Release poms & deployment script created in #{rel_location}\n\n"
 }
-
-
-
-
-
